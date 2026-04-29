@@ -1,0 +1,21 @@
+﻿defaults:
+  - ../data/full10.yaml
+  - ../split/default.yaml
+  - ../model/resunet.yaml
+  - ../train/clean.yaml
+  - ../degradation/degbench.yaml
+  - ../calibration/global.yaml
+  - ../risk_control/global_msp.yaml
+  - ../analysis/heterogeneity.yaml
+
+experiment:
+  id: P04__full10__resunet__train-clean__eval-degbench__cal-global
+  protocol_id: P04
+  run_name: P04__full10__arm-compare__resunet__train-clean__eval-degbench__cal-global
+  arm_role: comparison_arm
+  arm_label: P01 comparison arm
+  design_prior_ref: core5
+seed: 1
+
+artifacts:
+  source_checkpoint_run_name: P00__full10__arm-compare__resunet__train-clean__eval-clean

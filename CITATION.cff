@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the associated paper and this software artifact."
+title: "DegradeRisk-Seg"
+version: "0.1.0"
+date-released: "2026-04-29"
+license: "MIT"
+authors:
+  - family-names: "Chen"
+    given-names: "Jiajun"
+    affiliation: "College of Earth Sciences, Jilin University"

@@ -1,0 +1,6 @@
+﻿degradation:
+  enabled: false
+  default_eval_family: clean
+  severity: L0
+  families: {}
+

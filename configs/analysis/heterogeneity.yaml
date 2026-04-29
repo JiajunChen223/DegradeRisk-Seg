@@ -1,0 +1,12 @@
+analysis:
+  temporal_clustering:
+    method: kmeans_curve
+    n_clusters: 4
+  bins:
+    roughness_quantiles: [0.33, 0.66]
+    dominance_quantiles: [0.33, 0.66]
+    coverage_quantiles: [0.33, 0.66]
+    boundary_quantiles: [0.33, 0.66]
+  significance:
+    bootstrap_rounds: 1000
+    confidence: 0.95

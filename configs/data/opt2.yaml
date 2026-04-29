@@ -1,0 +1,33 @@
+data:
+  name: opt2
+  feature_set_label: opt2
+  feature_family_count: 2
+  tensor_channel_count: 2
+  task: binary_segmentation
+  num_months: 12
+  image_size: [256, 256]
+  positive_label: 1
+  manifest_path: data/processed/split_manifests/plotrice_v1_official_split.csv
+  canonical_root: data/processed/canonical
+  normalization:
+    path: data/processed/canonical/normalization_opt2_plotrice_v1.json
+  source:
+    type: plotrice_v1_zip
+    root: ../PlotRice-V1.0
+    label_file: Labels.zip
+    split_files:
+      train: train.txt
+      val: val.txt
+      test: test.txt
+    feature_files:
+      NDVI: Feature-NDVI.zip
+      LSWI: Feature-LSWI.zip
+  feature_names:
+    - NDVI
+    - LSWI
+  feature_families:
+    - NDVI
+    - LSWI
+  feature_modalities:
+    - OPT
+    - OPT

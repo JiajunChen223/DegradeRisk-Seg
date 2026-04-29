@@ -1,0 +1,21 @@
+﻿analysis:
+  calibration_decomposition:
+    split: test
+    bins: 15
+    high_confidence_threshold: 0.90
+    include_raw: true
+    include_calibrated: true
+    eval_families:
+      - random_missing_months
+      - block_missing_months
+      - prefix_truncation
+      - modality_drop
+      - irregular_missing
+      - modality_aware_radiometric_perturbation
+    eval_severities:
+      random_missing_months: [L1, L2, L3]
+      block_missing_months: [L1, L2, L3]
+      prefix_truncation: [L1, L2, L3]
+      modality_drop: [L1, L2]
+      irregular_missing: [L1, L2, L3]
+      modality_aware_radiometric_perturbation: [L1, L2, L3]

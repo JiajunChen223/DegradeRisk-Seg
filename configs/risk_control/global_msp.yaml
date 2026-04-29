@@ -1,0 +1,6 @@
+risk_control:
+  name: global_msp
+  score: msp
+  threshold_mode: global
+  target_coverages: [0.95, 0.90, 0.80, 0.70]
+

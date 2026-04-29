@@ -1,0 +1,18 @@
+﻿defaults:
+  - ../data/core7.yaml
+  - ../split/default.yaml
+  - ../model/resunet.yaml
+  - ../train/clean.yaml
+  - ../degradation/clean.yaml
+  - ../calibration/global.yaml
+  - ../risk_control/global_msp.yaml
+  - ../analysis/heterogeneity.yaml
+
+experiment:
+  id: P00__core7__resunet__train-clean__eval-clean
+  protocol_id: P00
+  run_name: P00__core7__arm-stage1val__resunet__train-clean__eval-clean
+  arm_role: stage1_validation_arm
+  arm_label: stage-1 execution / validation arm
+  design_prior_ref: core5
+seed: 1

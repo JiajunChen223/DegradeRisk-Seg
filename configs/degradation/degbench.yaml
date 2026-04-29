@@ -1,0 +1,46 @@
+﻿degradation:
+  enabled: true
+  default_eval_family: random_missing_months
+  severity: L2
+  eval_families:
+    - random_missing_months
+    - block_missing_months
+    - prefix_truncation
+    - modality_drop
+    - irregular_missing
+  families:
+    random_missing_months:
+      type: random_missing_months
+      severities:
+        L1: {drop_k: 2}
+        L2: {drop_k: 4}
+        L3: {drop_k: 6}
+    block_missing_months:
+      type: block_missing_months
+      severities:
+        L1: {block_len: 2}
+        L2: {block_len: 4}
+        L3: {block_len: 6}
+    prefix_truncation:
+      type: prefix_truncation
+      severities:
+        L1: {keep_t: 10}
+        L2: {keep_t: 8}
+        L3: {keep_t: 6}
+    modality_drop:
+      type: modality_drop
+      severities:
+        L1: {drop_group: OPT}
+        L2: {drop_group: SAR}
+    irregular_missing:
+      type: irregular_missing
+      severities:
+        L1: {retain_rate: 0.83}
+        L2: {retain_rate: 0.67}
+        L3: {retain_rate: 0.50}
+    modality_aware_radiometric_perturbation:
+      type: modality_aware_radiometric_perturbation
+      severities:
+        L1: {sar_multiplicative_std: 0.03, sar_additive_std: 0.01, opt_gain_std: 0.02, opt_additive_std: 0.02, outlier_prob: 0.00}
+        L2: {sar_multiplicative_std: 0.06, sar_additive_std: 0.02, opt_gain_std: 0.04, opt_additive_std: 0.04, outlier_prob: 0.01}
+        L3: {sar_multiplicative_std: 0.10, sar_additive_std: 0.03, opt_gain_std: 0.07, opt_additive_std: 0.06, outlier_prob: 0.02}

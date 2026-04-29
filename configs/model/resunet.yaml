@@ -1,0 +1,8 @@
+model:
+  name: resunet
+  in_channels: null
+  base_channels: 32
+  depth: 4
+  dropout: 0.1
+  norm: group
+  norm_groups: 8

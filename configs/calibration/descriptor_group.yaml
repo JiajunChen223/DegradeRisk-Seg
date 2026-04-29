@@ -1,0 +1,11 @@
+calibration:
+  name: descriptor_group_temperature
+  mode: descriptor_group
+  metric: nll
+  fit_split: val_calib
+  report_split: test
+  group_keys:
+    - budget_bin
+    - longest_gap_bin
+    - phenology_shape_bin
+    - cross_modal_consistency_bin

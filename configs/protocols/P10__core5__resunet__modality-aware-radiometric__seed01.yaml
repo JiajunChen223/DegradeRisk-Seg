@@ -1,0 +1,27 @@
+﻿defaults:
+  - ../data/core5.yaml
+  - ../split/default.yaml
+  - ../model/resunet.yaml
+  - ../train/clean.yaml
+  - ../degradation/degbench.yaml
+  - ../calibration/global.yaml
+  - ../risk_control/global_msp.yaml
+
+experiment:
+  id: P10__core5__resunet__modality-aware-radiometric
+  protocol_id: P10
+  run_name: P10__core5__arm-designprior__resunet__modality-aware-radiometric
+  arm_role: design_prior
+  arm_label: design prior
+  design_prior_ref: core5
+seed: 1
+
+degradation:
+  default_eval_family: modality_aware_radiometric_perturbation
+  eval_families:
+    - modality_aware_radiometric_perturbation
+  eval_severities:
+    modality_aware_radiometric_perturbation: [L1, L2, L3]
+
+artifacts:
+  source_checkpoint_run_name: P00__core5__arm-designprior__resunet__train-clean__eval-clean

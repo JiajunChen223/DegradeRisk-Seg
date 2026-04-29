@@ -1,0 +1,22 @@
+﻿defaults:
+  - ../data/core5.yaml
+  - ../split/default.yaml
+  - ../model/resunet.yaml
+  - ../train/clean.yaml
+  - ../degradation/degbench.yaml
+  - ../calibration/global.yaml
+  - ../risk_control/global_msp.yaml
+  - ../analysis/heterogeneity.yaml
+
+experiment:
+  id: P02__core5__resunet__train-clean__eval-degbench
+  protocol_id: P02
+  run_name: P02__core5__arm-designprior__resunet__train-clean__eval-degbench
+  arm_role: design_prior
+  arm_label: design prior
+  design_prior_ref: core5
+  required_next: [P04]
+seed: 1
+
+artifacts:
+  source_checkpoint_run_name: P00__core5__arm-designprior__resunet__train-clean__eval-clean

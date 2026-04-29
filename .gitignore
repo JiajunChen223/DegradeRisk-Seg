@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Experiment outputs and model artifacts
+outputs/
+runs/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.log
+
+# Local Plot-Rice data packages. Keep lightweight metadata under data/processed.
+PlotRice-V1.0/
+data/raw/
+data/external/
+data/interim/
+data/processed/**/*.npz
+data/processed/**/*.npy
+*.zip
+
+# Notebooks and local reports
+.ipynb_checkpoints/
+*.docx
+*.pdf
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

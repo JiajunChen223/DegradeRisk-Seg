@@ -1,0 +1,11 @@
+﻿analysis:
+  risk_score_comparison:
+    eval_family: random_missing_months
+    eval_severity: L2
+    use_calibrated_logits: true
+    scores:
+      - msp
+      - margin
+      - entropy
+      - oracle
+    target_coverages: [0.95, 0.90, 0.80, 0.70]

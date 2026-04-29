@@ -1,0 +1,20 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+
+# Binary artifacts should not receive line-ending conversion.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tif binary
+*.tiff binary
+*.zip binary
+*.pt binary
+*.pth binary
+*.ckpt binary
+*.docx binary
+*.pdf binary

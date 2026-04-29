@@ -1,0 +1,21 @@
+﻿defaults:
+  - ../data/core7.yaml
+  - ../split/default.yaml
+  - ../model/resunet.yaml
+  - ../train/clean.yaml
+  - ../degradation/degbench.yaml
+  - ../calibration/descriptor_group.yaml
+  - ../risk_control/descriptor_group.yaml
+  - ../analysis/heterogeneity.yaml
+
+experiment:
+  id: P07__core7__resunet__train-clean__heterogeneity
+  protocol_id: P07
+  run_name: P07__core7__arm-stage1val__resunet__train-clean__heterogeneity
+  arm_role: stage1_validation_arm
+  arm_label: stage-1 execution / validation arm
+  design_prior_ref: core5
+seed: 1
+
+artifacts:
+  source_checkpoint_run_name: P00__core7__arm-stage1val__resunet__train-clean__eval-clean

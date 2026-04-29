@@ -1,0 +1,6 @@
+calibration:
+  name: global_temperature
+  mode: global
+  metric: nll
+  fit_split: val_calib
+  report_split: test

@@ -1,0 +1,22 @@
+﻿defaults:
+  - ../data/core7.yaml
+  - ../split/default.yaml
+  - ../model/resunet.yaml
+  - ../train/clean.yaml
+  - ../degradation/degbench.yaml
+  - ../calibration/global.yaml
+  - ../risk_control/global_msp.yaml
+  - ../analysis/calibration_decomposition.yaml
+
+experiment:
+  id: P08__core7__resunet__calibration-decomposition
+  protocol_id: P08
+  run_name: P08__core7__arm-stage1val__resunet__calibration-decomposition
+  arm_role: stage1_validation_arm
+  arm_label: stage-1 execution / validation arm
+  design_prior_ref: core5
+seed: 1
+
+artifacts:
+  source_checkpoint_run_name: P00__core7__arm-stage1val__resunet__train-clean__eval-clean
+  source_calibrator_run_name: P04__core7__arm-stage1val__resunet__train-clean__eval-degbench__cal-global

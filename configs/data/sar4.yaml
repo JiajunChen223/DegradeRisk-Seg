@@ -1,0 +1,41 @@
+data:
+  name: sar4
+  feature_set_label: sar4
+  feature_family_count: 4
+  tensor_channel_count: 4
+  task: binary_segmentation
+  num_months: 12
+  image_size: [256, 256]
+  positive_label: 1
+  manifest_path: data/processed/split_manifests/plotrice_v1_official_split.csv
+  canonical_root: data/processed/canonical
+  normalization:
+    path: data/processed/canonical/normalization_sar4_plotrice_v1.json
+  source:
+    type: plotrice_v1_zip
+    root: ../PlotRice-V1.0
+    label_file: Labels.zip
+    split_files:
+      train: train.txt
+      val: val.txt
+      test: test.txt
+    feature_files:
+      DpRVIc: Feature-DpRVIc.zip
+      sigma0_VH: Feature-VHSigma0.zip
+      sigma0_VV: Feature-VVSigma0.zip
+      gamma0_VH: Feature-VHGamma0.zip
+  feature_names:
+    - DpRVIc
+    - sigma0_VH
+    - sigma0_VV
+    - gamma0_VH
+  feature_families:
+    - DpRVIc
+    - sigma0_VH
+    - sigma0_VV
+    - gamma0_VH
+  feature_modalities:
+    - SAR
+    - SAR
+    - SAR
+    - SAR

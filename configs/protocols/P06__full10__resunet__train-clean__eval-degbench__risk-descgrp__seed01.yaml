@@ -1,0 +1,21 @@
+﻿defaults:
+  - ../data/full10.yaml
+  - ../split/default.yaml
+  - ../model/resunet.yaml
+  - ../train/clean.yaml
+  - ../degradation/degbench.yaml
+  - ../calibration/descriptor_group.yaml
+  - ../risk_control/descriptor_group.yaml
+  - ../analysis/heterogeneity.yaml
+
+experiment:
+  id: P06__full10__resunet__train-clean__eval-degbench__risk-descgrp
+  protocol_id: P06
+  run_name: P06__full10__arm-compare__resunet__train-clean__eval-degbench__risk-descgrp
+  arm_role: comparison_arm
+  arm_label: P01 comparison arm
+  design_prior_ref: core5
+seed: 1
+
+artifacts:
+  source_checkpoint_run_name: P00__full10__arm-compare__resunet__train-clean__eval-clean

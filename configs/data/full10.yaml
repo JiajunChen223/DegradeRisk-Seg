@@ -1,0 +1,96 @@
+data:
+  name: full10
+  feature_set_label: full10 (10 families / 14 channels)
+  feature_family_count: 10
+  tensor_channel_count: 14
+  task: binary_segmentation
+  num_months: 12
+  image_size: [256, 256]
+  positive_label: 1
+  manifest_path: data/processed/split_manifests/plotrice_v1_official_split.csv
+  canonical_root: data/processed/canonical
+  normalization:
+    path: data/processed/canonical/normalization_full10_plotrice_v1.json
+  source:
+    type: plotrice_v1_zip
+    root: ../PlotRice-V1.0
+    num_months: 12
+    label_file: Labels.zip
+    split_files:
+      train: train.txt
+      val: val.txt
+      test: test.txt
+    feature_files:
+      DpRVIc: Feature-DpRVIc.zip
+      sigma0_VH: Feature-VHSigma0.zip
+      sigma0_VV: Feature-VVSigma0.zip
+      NDVI: Feature-NDVI.zip
+      LSWI: Feature-LSWI.zip
+      gamma0_VH: Feature-VHGamma0.zip
+      gamma0_VV: Feature-VVGamma0.zip
+      RVI: Feature-RVI.zip
+      true_colour_R: Feature-TrueColour.zip
+      true_colour_G: Feature-TrueColour.zip
+      true_colour_B: Feature-TrueColour.zip
+      false_colour_R: Feature-FalseColour.zip
+      false_colour_G: Feature-FalseColour.zip
+      false_colour_B: Feature-FalseColour.zip
+    feature_band_indices:
+      true_colour_R: 0
+      true_colour_G: 1
+      true_colour_B: 2
+      false_colour_R: 0
+      false_colour_G: 1
+      false_colour_B: 2
+    feature_bands_per_month:
+      true_colour_R: 3
+      true_colour_G: 3
+      true_colour_B: 3
+      false_colour_R: 3
+      false_colour_G: 3
+      false_colour_B: 3
+  feature_names:
+    - DpRVIc
+    - sigma0_VH
+    - sigma0_VV
+    - NDVI
+    - LSWI
+    - gamma0_VH
+    - gamma0_VV
+    - RVI
+    - true_colour_R
+    - true_colour_G
+    - true_colour_B
+    - false_colour_R
+    - false_colour_G
+    - false_colour_B
+  feature_families:
+    - DpRVIc
+    - sigma0_VH
+    - sigma0_VV
+    - NDVI
+    - LSWI
+    - gamma0_VH
+    - gamma0_VV
+    - RVI
+    - true_colour
+    - true_colour
+    - true_colour
+    - false_colour
+    - false_colour
+    - false_colour
+  feature_modalities:
+    - SAR
+    - SAR
+    - SAR
+    - OPT
+    - OPT
+    - SAR
+    - SAR
+    - SAR
+    - OPT
+    - OPT
+    - OPT
+    - OPT
+    - OPT
+    - OPT

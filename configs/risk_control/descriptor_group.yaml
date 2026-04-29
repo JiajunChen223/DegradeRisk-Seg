@@ -1,0 +1,10 @@
+risk_control:
+  name: descriptor_group_msp
+  score: msp
+  threshold_mode: descriptor_group
+  target_coverages: [0.95, 0.90, 0.80, 0.70]
+  group_keys:
+    - budget_bin
+    - longest_gap_bin
+    - phenology_shape_bin
+    - cross_modal_consistency_bin

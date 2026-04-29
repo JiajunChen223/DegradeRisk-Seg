@@ -1,0 +1,10 @@
+split:
+  name: default_random
+  train: train
+  val: val
+  val_calib: val_calib
+  test: test
+  split_seed: 101
+  val_ratio: 0.15
+  val_calib_ratio: 0.15
+  official_val_calib_ratio: 0.5
