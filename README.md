@@ -1,25 +1,35 @@
 # DegradeRisk-Seg
 
-**DegradeRisk-Seg** is the paper code for risk-controlled semantic segmentation under degraded multi-modal observations.
+**Risk-controlled semantic segmentation under degraded multi-modal observations.**
 
-`unified degradation protocol + risk-controlled prediction + endogenous heterogeneity analysis`
+DegradeRisk-Seg accompanies a research pipeline for studying semantic segmentation when multi-modal remote-sensing observations are incomplete, perturbed, or unevenly available over time. The code provides a unified degradation benchmark, calibration analysis, selective prediction, and endogenous heterogeneity analysis in a reproducible experiment structure.
 
-The current paper experiments use Plot-Rice v1.0 as the evaluation dataset, but the repository name and method framing are intentionally dataset-agnostic. Only manuscript-supported experiment entries, scripts, configuration files, tests, and lightweight metadata are retained. Full data archives, trained checkpoints, generated outputs, manuscript drafts, and local environment caches are intentionally excluded.
+The reference experiments use Plot-Rice v1.0. The project name and method framing are dataset-agnostic: the degradation, calibration, and risk-control components are organized so they can be adapted to other segmentation datasets with similar temporal or multi-modal structure.
 
-## Repository Status
+Author: **Jiajun Chen**, College of Earth Sciences, Jilin University.
 
-- Research artifact for a degradation-aware segmentation pipeline.
-- Author: Jiajun Chen, College of Earth Sciences, Jilin University. 中文：陈家骏，吉林大学地球科学学院。
-- Default backbone: `Res U-Net`.
-- Default design prior: `core5`.
-- Stage-1 execution / validation arm: `core7`.
-- Extended comparison arm: `full10`.
-- License: MIT.
-- Citation metadata: `CITATION.cff`. Add final paper title, DOI, and repository URL before tagging a release if available.
+## Highlights
+
+- Unified degradation protocols for random temporal missingness, structured temporal missingness, modality availability degradation, and modality-aware radiometric perturbation.
+- Risk-controlled selective prediction with both global and descriptor-conditioned operating points.
+- Calibration collapse and calibration decomposition analyses under degraded observations.
+- Endogenous heterogeneity analysis for understanding which observation conditions drive retained risk.
+- Paper-ready protocol registry, configuration files, tests, and lightweight metadata for reproducible execution.
+
+## Repository Layout
+
+```text
+configs/    Experiment, data, model, degradation, calibration, and risk-control configs
+data/       Lightweight split and normalization metadata
+docs/       Data contract, protocol registry, reproducibility guide, release checklist
+scripts/    Training, evaluation, calibration, selective prediction, and plotting entry points
+src/        Core package code
+tests/      Regression and paper-guard tests
+```
 
 ## Installation
 
-Create a virtual environment and install the project in editable mode:
+Create a Python environment and install the project in editable mode:
 
 ```bash
 python -m venv .venv
@@ -46,7 +56,7 @@ conda activate degraderisk-seg
 
 ## Data Setup
 
-The code reads official Plot-Rice v1.0 zip packages directly; a full unpack is not required.
+The Plot-Rice v1.0 reader works directly with the official zip packages. A full unpack is not required.
 
 Expected local layout:
 
@@ -63,7 +73,7 @@ Expected local layout:
     ...
 ```
 
-The default data configs point to `../PlotRice-V1.0`. If your data lives elsewhere, pass an override:
+The default configs use `../PlotRice-V1.0`. To use a different data location, pass an override:
 
 ```bash
 python scripts/train.py \
@@ -71,44 +81,45 @@ python scripts/train.py \
   --override data.source.root=/path/to/PlotRice-V1.0
 ```
 
-Lightweight split and normalization metadata are versioned under `data/processed/`. Full data archives and generated arrays are ignored by `.gitignore`.
+Split manifests and normalization statistics are stored under `data/processed/`. Generated arrays, checkpoints, and run outputs are kept outside version control through `.gitignore`.
 
-## Quick Run
+## Quick Start
 
-Clean baseline:
+Train the clean baseline:
 
 ```bash
 python scripts/train.py --config configs/protocols/P00__core5__resunet__train-clean__eval-clean__seed01.yaml
 ```
 
-Degradation benchmark:
+Evaluate the degradation benchmark:
 
 ```bash
 python scripts/eval.py --config configs/protocols/P02__core5__resunet__train-clean__eval-degbench__seed01.yaml
 ```
 
-Required calibration follow-up:
+Fit the global calibration follow-up:
 
 ```bash
 python scripts/calibrate.py --config configs/protocols/P04__core5__resunet__train-clean__eval-degbench__cal-global__seed01.yaml
 ```
 
-Global selective baseline and descriptor-conditioned risk control:
+Compare global and descriptor-conditioned risk control:
 
 ```bash
 python scripts/selective_predict.py --config configs/protocols/P05__core5__resunet__train-clean__eval-degbench__risk-global__seed01.yaml
 python scripts/selective_predict.py --config configs/protocols/P06__core5__resunet__train-clean__eval-degbench__risk-descgrp__seed01.yaml
 ```
 
-Integrated evidence protocols:
+Run integrated evidence analyses:
 
 ```bash
+python scripts/heterogeneity_analysis.py --config configs/protocols/P07__core5__resunet__train-clean__heterogeneity__seed01.yaml
 python scripts/calibration_decomposition.py --config configs/protocols/P08__core5__resunet__calibration-decomposition__seed01.yaml
 python scripts/risk_score_comparison.py --config configs/protocols/P09__core5__resunet__risk-score-comparison__seed01.yaml
 python scripts/eval.py --config configs/protocols/P10__core5__resunet__modality-aware-radiometric__seed01.yaml
 ```
 
-The protocol YAML files are stored with `seed01` names as canonical run anchors. Additional manuscript seeds reuse the same protocol YAMLs:
+Repeat a protocol with additional seeds by overriding `seed`:
 
 ```bash
 python scripts/train.py --config configs/protocols/P00__core5__resunet__train-clean__eval-clean__seed01.yaml --override seed=2
@@ -117,50 +128,56 @@ python scripts/train.py --config configs/protocols/P00__core5__resunet__train-cl
 
 See `docs/reproducibility.md` for the full paper-oriented run sequence.
 
-## Protocol Semantics
+## Protocols
 
-- `P02` establishes degradation damage patterns.
-- `P04` is the required follow-up for calibration collapse.
-- `P05` is the global selective baseline.
-- `P06` is the descriptor-conditioned extension over `P05`.
-- `P08`, `P09`, and `P10` provide integrated evidence analyses used by the manuscript.
+Core protocol IDs:
 
-Feature-set semantics:
+- `P00`: clean baseline.
+- `P02`: degradation benchmark.
+- `P04`: calibration follow-up under degradation.
+- `P05`: global selective prediction baseline.
+- `P06`: descriptor-conditioned selective prediction.
+- `P07`: endogenous heterogeneity analysis.
+- `P08`: calibration decomposition.
+- `P09`: confidence-score and oracle selective-risk comparison.
+- `P10`: modality-aware radiometric perturbation.
 
-- `core5`: 5 feature families / 5 tensor channels.
-- `core7`: 7 feature families / 7 tensor channels.
-- `full10`: 10 feature families / 14 tensor channels.
+Feature-set roles:
 
-Leakage boundary:
+- `core5`: compact multi-modal design prior, 5 feature families / 5 tensor channels.
+- `core7`: stage-1 execution and validation arm, 7 feature families / 7 tensor channels.
+- `full10`: extended comparison arm, 10 feature families / 14 tensor channels.
 
+Descriptor boundary:
+
+- Input-safe descriptors can be used for calibration, thresholding, and grouping.
 - `coverage`, `boundary complexity`, and `fragmentation` are analysis-only descriptors.
-- They must not enter online calibration, thresholding, or descriptor grouping.
 
-More details are in `docs/experiment_registry.md` and `docs/data_contract.md`.
+Details are documented in `docs/experiment_registry.md` and `docs/data_contract.md`.
 
 ## Artifacts
 
 Runs are keyed by `experiment.run_name` and seed:
 
-- Run outputs: `outputs/runs/<run_name>/seedXX/`.
-- Checkpoints: `outputs/checkpoints/<run_name>/seedXX/checkpoint__best-dice.pt`.
-- Calibrators: `outputs/checkpoints/<run_name>/seedXX/calibrator__mode-<mode>__family-<family>__severity-<severity>.json`.
-
-Generated outputs are ignored by git. Publish trained checkpoints separately through a release asset or data archive if they are needed for reproduction.
+```text
+outputs/runs/<run_name>/seedXX/
+outputs/checkpoints/<run_name>/seedXX/checkpoint__best-dice.pt
+outputs/checkpoints/<run_name>/seedXX/calibrator__mode-<mode>__family-<family>__severity-<severity>.json
+```
 
 ## Tests
 
-Run the lightweight test suite:
+Run the test suite:
 
 ```bash
 python -m pytest
 ```
 
-The tests validate metric behavior, data-reader behavior, degradation semantics, protocol registration, and paper guards.
+The tests cover metric behavior, data-reader behavior, degradation semantics, protocol registration, and paper-guard invariants.
 
 ## Citation
 
-If you use this repository, cite the associated paper and this software artifact. Add the final paper title, DOI, and repository URL to `CITATION.cff` before creating a formal release if available.
+If you use this repository, please cite the associated paper and this software artifact. Citation metadata is provided in `CITATION.cff`.
 
 ## License
 
